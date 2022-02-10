@@ -10,7 +10,9 @@ output:
       collapsed: no
       number_sections: yes
       smooth_scroll: no
+
 ---
+
 
 <style>
  #TOC {
@@ -66,7 +68,7 @@ pre {
 
 ```{r Initialsetup, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 #rm(list = ls())
-libs <- c("dplyr", "plm",  "stargazer","ggplot2","readxl","tidyr", "tibble","directlabels", "ggthemes", "RColorBrewer", "knitr", "stringr","sjPlot", "sjmisc", "sjlabelled",'tinytex',"usethis")
+libs <- c("dplyr", "plm",  "stargazer","ggplot2","readxl","tidyr", "tibble","directlabels", "ggthemes", "RColorBrewer", "knitr", "stringr","sjPlot", "sjmisc", "sjlabelled",'tinytex',"usethis", "knit")
 for (i in libs) {
   if(!is.element(i,.packages(all.available = TRUE))) {
     install.packages(i,repos="https://cran.revolutionanalytics.com/")
