@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Juan M. Gonzalez Castillo" />
+
+<meta name="date" content="2022-02-10" />
+
+<title>Ecommetrics</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Ecommetrics</h1>
+<h4 class="author">Juan M. Gonzalez Castillo</h4>
+<h4 class="date">10 February 2022</h4>
+
+</div>
+
+
+<style>
+ #TOC {
+  color: #708090;
+  font-family: Calibri;
+  font-size: 16px; 
+  border-color: #708090;
+}
+ #header {
+  color: #F08080;
+  background-color: #F5F5F5;
+  opacity: 0.6;
+  font-family: Calibri;
+  font-size: 80px;
+}
+h2.title {
+  color: #F08080;
+  background-color: #fff9ed;
+  opacity: 0.6;
+  font-family: Calibri;
+  font-size: 50px;
+}
+h3.subtitle{
+  color: #F08080;
+  background-color: #F5F5F5;
+  opacity: 0.6;
+  font-family: Calibri;
+  font-size: 30px;
+}
+h4.author {
+  color: #708090;
+  font-family: Calibri;
+  background-color: #F5F5F5;
+}
+h4.date {
+  color: #708090;  
+  font-family: Calibri;
+  background-color: #F5F5F5;
+}
+body {
+  color: #708090;
+  font-family: Calibri;
+  background-color: #F5F5F5;
+  font-size: 25px;
+  text-align: justify;
+}
+pre {
+  color: #708090;
+  background-color: #F8F8FF;
+}
+</style>
+<div id="headid" class="section level1">
+<h1><strong>PORTFOLIO</strong></h1>
+<p><img src="logos%20ecommetrics%20and%20lucero%20dental%20group.png" alt="E-commetrics &amp; Lucero Dental Group" width="900" />  </p>
+<div id="portafolio-de-negocios-de-lucero-dental-group" class="section level2">
+<h2>Portafolio de negocios de Lucero Dental Group</h2>
+<p> </p>
+<p>La consultoría de negocios de e-commetrics te resuelve el dilema digital<br />
+</p>
+<p>¿Cómo vender los siguientes servicios…</p>
+<ul>
+<li>Implantes</li>
+<li>Endodoncia</li>
+<li>Implantes</li>
+<li>Endodoncia</li>
+<li>Ortodoncia</li>
+<li>Odontopediatría</li>
+<li>Protesis</li>
+<li>Limpiezas</li>
+<li>Coronas</li>
+<li>Odontología General e Integral</li>
+<li>Odontología Cosmética</li>
+</ul>
+<p>  <span style="float:right">… en línea.</span></p>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<p><img src="logos%20banner.png" alt="Ecosistema digital" width="900" />  </p>
+<p>Siguiendo un plan y esquema de trabajo ya probado y estructurado, atravesamos las genialidades necesarias para construir o actualizar las plataformas digitales necesarias sostener un negocio en línea que, al final de su proceso, nos otorga una capacidad de operación sólida para el posicionamiento de un negocio.<br />
+</p>
+<p>Para dos consultorios dentales en dos ciudades distintas.<br />
+</p>
+<p>La estrategia se contruye para obtener clientes en ambientes digitales y convertirlos en pacientes.<br />
+</p>
+<p>
+ 
+</p>
+</div>
+<div id="objetivos-de-la-estrategia" class="section level2">
+<h2>Objetivos de la estrategia</h2>
+<p><strong>Una capacidad digital para que ambos consultorios de Lucero Dental Group estén posicionados digitalmente en CDMX y Tijuana respectivamente.</strong><br />
+</p>
+<div id="lucero-dental-group" class="section level3">
+<h3>Lucero Dental Group</h3>
+<img src="LDG%20CDMX.png" alt="Ciudad de México" width="400" /> <img src="LDG%20TIJ.png" alt="Tijuana" width="400" />
+<p>
+ 
+</p>
+</div>
+<div id="centro-radiológico-bosques" class="section level3">
+<h3>Centro Radiológico Bosques</h3>
+<p><strong>Incorporar la estrategia digital a Centro Radiológico Bosques iniciando con su +Branding</strong><br />
+</p>
+<p><img src="logotipo%20centro%20radiologico%20bosques.jpg" alt="Centro Radiológico Bosques" width="700" />  </p>
+</div>
+</div>
+</div>
+<div id="e-commerce-kickoff-onboarding-package" class="section level1">
+<h1><strong>E-COMMERCE KICKOFF &amp; ONBOARDING PACKAGE</strong></h1>
+<ul>
+<li>Logísitica de un calendario de citas y suministro de materiale</li>
+<li>Marketing para servicios de salud y atención al cliente</li>
+<li>Tecnología digital de vanguardia</li>
+</ul>
+<p><img src="3%20circulos%20new.png" alt="E-commerce para todos" width="700" />  </p>
+<div id="inicio-del-desarrollo-del-e-commerce-en-lucero-dental-group" class="section level2">
+<h2>INICIO del desarrollo del e-Commerce en Lucero Dental Group</h2>
+<p>Iniciamos contrato y factura fechada en agosto 7 de 2021</p>
+<p> </p>
+<ul>
+<li>Calendario &amp; Esquema de trabajo <a href="https://docs.google.com/document/d/1oXbLQP4dXrA3pL93DHzzGXm-xfyoyH2rbzMrSwZ9iek/edit?usp=sharing" id="Ecommerceprop">E-COMMERCE PROPOSAL</a>
+<p>
+ 
+</p></li>
+<li>Acuerdo de consultoría de E-commetrics <a href="https://www.e-commetrics.com">PRIVATE</a>
+<p>
+ 
+</p></li>
+<li>Digrama de GANTT para Lucero Dental Group <a href="https://docs.google.com/spreadsheets/d/1CS2NK0yqkCd_B_ixXEW8T2b1f_ZQwLcx9KcddY5OIjY/edit?usp=sharing" id="GANTT">ACTUAL GANTT</a></li>
+</ul>
+<p> </p>
+<p> </p>
+</div>
+</div>
+<div id="mvp-organic-growth" class="section level1">
+<h1><strong>MVP + ORGANIC GROWTH</strong></h1>
+<div id="integración-de-una-consultoría-de-negocios-en-e-commerce" class="section level2">
+<h2>Integración de una consultoría de negocios en E-COMMERCE</h2>
+<p> </p>
+<ul>
+<li>Requerimientos técnicos <a href="https://1drv.ms/x/s!AmO5REYvrpHJgfs6iHEP_IyL-Ku8UQ?e=RG6VDI">Lista</a>
+<p>
+ 
+</p></li>
+<li>GANTT milestones &amp; next steps
+<p>
+ 
+</p></li>
+<li>Webpage as MVP <a href="https://www.lucerodentalmexico.com">MVP Lucerodentalmexico.com</a>
+<p>
+ 
+</p></li>
+<li>Primeros reportes de FB &amp; GOOGLE <a href="">Strategic reports</a>
+<p>
+ 
+</p></li>
+<li>Artes y UX/UI <a href="https://1drv.ms/u/s!AmO5REYvrpHJge1Dtw4lJZPcDk5EBg?e=RSqUqQ" id="marketing">Lucero Marketing</a>
+<p>
+ 
+</p></li>
+<li>Consultoría y entrenamiento
+<p>
+ 
+</p></li>
+</ul>
+</div>
+</div>
+<div id="arquitectura-estatégica-en-conjunto" class="section level1">
+<h1><strong>Arquitectura estatégica en conjunto</strong></h1>
+<div id="una-mayor-participación-en-la-demanda-es-en-el-ecommerce" class="section level3">
+<h3>Una Mayor participación en la demanda es en el ECOMMERCE</h3>
+</div>
+<div id="qué-lo-lograremos" class="section level3">
+<h3><strong>¿Qué lo lograremos?</strong></h3>
+<p>Desarrollamos un mapa estratégico que vincula los activos tangibles y los procesos críticos a la propuesta de valor al cliente y a los resultados financieros.</p>
+<p> </p>
+<p>Administración elemental</p>
+<ul>
+<li>Planeación</li>
+<li>Organización</li>
+<li>Ejecución</li>
+<li>Control</li>
+</ul>
+<p> </p>
+<p>Áreas empresariales</p>
+<ul>
+<li>Operaciones y Ventas</li>
+<li>Finanzas</li>
+<li>Comunicación y Marketing</li>
+<li>Tecnología y Desarrollo</li>
+</ul>
+<p><img src="BSC%20map.PNG" alt="Construímos digitalmente aquel negocio ideal que deseamos obtener de manera abstracta en el metaverso" />  </p>
+<p>Siguiendo metodologías de arquitecturas de sistemas y programación entregamos el <strong>Mapa de Flujo de vida de los pacientes <del>clientes</del> digitales</strong> y offline que sigue a la estrategia multicanal de <strong>META</strong> <del>Facebook</del> y <strong>Google</strong> para afianzar una operación de Marketing digital constante con resulados y orientada al crecimiento de la afluencia de pacientes en los consultorios de Lucero Dental Group.</p>
+<p> </p>
+</div>
+</div>
+<div id="Flujo" class="section level1">
+<h1><strong>MAPA DE FLUJO DEL PACIENTE</strong></h1>
+<p> <br />
+<img src="Marketing%20Strategy%20Customer&#39;s%20Journey-Flujo%20LDG.png" alt="Customer’s journey" style="width:900.0%" /></p>
+<div id="sabemos-que-problemas-multisectoriales-requieren-dirección-multidepartamental." class="section level2">
+<h2>Sabemos que problemas multisectoriales requieren dirección multidepartamental.</h2>
+</div>
+<div id="dirección-orientada-a-equipos." class="section level2">
+<h2>Dirección orientada a equipos.</h2>
+</div>
+<div id="garantía-de-satisfacción" class="section level2">
+<h2>Garantía de satisfacción</h2>
+<p>  <embed src="Resume-commercial1.pdf" style="width:100.0%" />  </p>
+</div>
+</div>
+<div id="meta-facebook-google-strategies" class="section level1">
+<h1><strong>META <del>Facebook</del> &amp; GOOGLE STRATEGIES</strong></h1>
+<p>A partir de las necesidades de la empresas digitales es que se puede diseñar un análisis al portafolio creado bajo una una estrategia para META Business <del>FACEBOOK</del> que permita acceder a un mayor reparto del mercado, es decir posicionarse en más búsquedas a través de <strong>las redes sociales más visitadas del mundo</strong> META FACEBOOK, Instagram, Messenger, Whatsapp y grupos en redes sociales además de aparecer y competir por la clasificación en GOOGLE mediante la implementación de keywords para el posicionamiento en intenciones de búsqueda en el navegador y buscador más utilizados del mundo.<br />
+</p>
+<div id="positioning-posicionamiento" class="section level2">
+<h2>positioning = Posicionamiento<br />
+</h2>
+<p>Siendo impulsor de nuevas propuestas de valor en dos mercado digitales de la industria dental en dos geografías distintas se pretende robustecer la presencia digital y así el tráfico orgánico dentro del metaverso al cual entramos con las redes y la web 3.0. Nos integramo con el paciente a través de la tecnología.<br />
+</p>
+<p> <br />
+</p>
+</div>
+</div>
+<div id="estrategia-multicanal-meta-google" class="section level1">
+<h1><strong>Estrategia Multicanal</strong> <a href="https://1drv.ms/w/s!AmO5REYvrpHJgp8D1Wcnhi5TjdBXUg?e=6ozr3S" id="strategy">Meta &amp; Google</a></h1>
+<p> <br />
+</p>
+<div id="resumen-de-la-estrategia-en-meta-facebook" class="section level2">
+<h2>Resumen de la Estrategia en Meta (Facebook)</h2>
+<pre class="text"><code>Creación de contenido para el perfil sobre:
+
+  1. Tratamientos
+  2. Ubicación
+  3. Promociones y descuentos
+  4. Personal e instalaciones
+  5. Otros
+
+
+Creación de de contenido publicitario para LuceroAds
+
+Enfocado en los siguientes elementos claves referentes al valor agregado que otorgamos como consultorio:
+
+1.  Indicar sus años de experiencia en EUA y que ahora se encuentra también en MX 
+2.  Incluir fotografías de las doctoras con los servicios que se promocionan 
+3.  Usar las fotos de la clínica para hablar del turismo dental en Tijuana usando logos de la plaza y del hotel</code></pre>
+<p> <br />
+</p>
+<p><img src="Programación%20Enero.png" alt="FACEBOOK posts Calendar of publsihed posts" style="width:600.0%" />  <br />
+</p>
+<div id="meta-ads-historicos-al-8-feb-2022" class="section level3">
+<h3>Meta Ads Historicos al 8 Feb 2022</h3>
+<p><img src="LuceroAds.png" alt="Published Lucero Ads Tijuana" style="width:400.0%" />  <br />
+</p>
+<p>Observamos alcances, impresiones Costo por Resultado (CPC) vs Total (Volumen)</p>
+<p> <br />
+</p>
+</div>
+<div id="metaads" class="section level3">
+<h3>MetaAds</h3>
+<p><img src="LuceroAdsCDMX.png" alt="Published Lucero Ads CDMX" style="width:400.0%" />  <br />
+</p>
+</div>
+</div>
+</div>
+<div id="meta-ads-analytics" class="section level1">
+<h1>META ADS Analytics</h1>
+<p>| Dato | Cantidad| |Número de Lead Conseguidos |34 | |Número de Conversaciones completas | 31| |Número de pacientes confirmados | 2|</p>
+<p> <br />
+</p>
+<div id="seo" class="section level2">
+<h2>SEO</h2>
+<div id="resumen-seo-meta-google" class="section level3">
+<h3>Resumen SEO <a href="https://1drv.ms/w/s!AmO5REYvrpHJgp8D1Wcnhi5TjdBXUg?e=6ozr3S">Meta &amp; Google</a></h3>
+<pre class="text"><code>
+Encuentra implantes en tijuana tratamientos dentales endodoncia root canal ortodoncia calidad y seguridad en cirugía y dental lucero en new city medial
+
+Mira como poner implantes en tijuana tratamientos dentales endodoncia root canal ortodoncia calidad y seguridad en cirugía y dental lucero en new city medial
+
+KERWORDS:
+
+  1.    Implantes
+  2.    Ortodoncia
+  3.    Tijuana
+  4.    dental
+</code></pre>
+<p>Blog Posts: GOOGLE ANALYTICS GOOGLE DASHBOARDS</p>
+<p> <br />
+</p>
+</div>
+</div>
+<div id="sugerencias" class="section level2">
+<h2>Sugerencias:</h2>
+<ul>
+<li>Medición a través de las 5 fuerzas de Porter y aplicar un BSC a largo plazo.</li>
+<li>LEADS</li>
+<li>WEBPAGE Inglés</li>
+<li>CRM strategy</li>
+</ul>
+<p> <br />
+</p>
+</div>
+</div>
+<div id="deliverables" class="section level1">
+<h1><strong>DELIVERABLES</strong></h1>
+<p><strong>Customer Flow Map</strong> <a href="#Flujo">Flujo del paciente</a></p>
+<p><strong>Strategy</strong> <a href="#strategy">Estategia digital</a></p>
+<p>Go to GANTT: <a href="#GANTT">GANTT link</a><br />
+Go to Marketing files: <a href="#Marketing">DRIVE Marketing</a><br />
+Go to ecommerce proposal: <a href="#Ecommerceprop">Ecommerce proposal</a><br />
+Ver flujo del paciente: <a href="#Flujo">Flujo del paciente</a><br />
+Ver Estrategia Multicanal: <a href="#strategy">Estategia digital</a><br />
+Ir a Glorasio de Definiciones: <a href="https://docs.google.com/document/d/1FORveezfhuU7M0_TXFJl-WXumC_c8csy/edit?usp=sharing&amp;ouid=101795512112686752530&amp;rtpof=true&amp;sd=true">Glosario</a>  <br />
+</p>
+</div>
+<div id="portolio-status" class="section level1">
+<h1>PORTOLIO STATUS</h1>
+<table>
+<thead>
+<tr class="header">
+<th><em>Cuenta</em></th>
+<th><em>Estatus</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LDG TIJUANA</td>
+<td>98%</td>
+</tr>
+<tr class="even">
+<td>LDG CDMX</td>
+<td>65%</td>
+</tr>
+<tr class="odd">
+<td>C R BOSQUES</td>
+<td>40%</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

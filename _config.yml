@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 markdown: kramdown
 plugins:
   - jekyll-relative-links
@@ -13,3 +14,7 @@ include:
   - CONTRIBUTING.md
   - ISSUE_TEMPLATE.md
   - PULL_REQUEST_TEMPLATE.md
+=======
+theme: jekyll-theme-architect
+markdown: kramdown
+>>>>>>> 82dca19eba3e0e93631101d1e7413987cea338f5
